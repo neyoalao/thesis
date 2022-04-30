@@ -1,0 +1,92 @@
+\input{./preamble.tex}
+
+\newcommand*{\mytitle}{Generating Synthetic Images for Plant Disease in Sugar Beet using Augmentation Techniques} % Titel
+\newcommand*{\myinstitute}{Department Lippstadt 2} % Institut
+
+
+\newcommand*{\myauthor}{Olaniyi Bayonle Alao} % Autoren
+\newcommand*{\myreporttype}{Bachelor Thesis} % Bericht-Typ
+\newcommand*{\mygraduation}{Bachelor of Engineering} % Vollständige Anschrift
+
+
+
+\newcommand*{\firstexaminer}{Prof. Dr. Stefan Henkler} % Ort
+\newcommand*{\secondexaminer}{Prof. Dr. Achim Rettberg}
+\newcommand*{\thirdexaminer}{Dipl.-Wirt.-inf. Kristian Rother} % Ort
+\newcommand*{\mydate}{\today} % Datum
+
+
+
+% ============= Dokumentbeginn =============
+
+\begin{document}
+
+% Seiten ohne Kopf- und Fußzeile sowie Seitenzahl
+\pagestyle{empty}
+
+\include{01_titel}	% Einbinden der Titelseite
+\newpage 					% Um Seite nach der Titelseite einzubinden -> bei eigener Titelseite und nicht der Latex-Version erforderlich
+\thispagestyle{empty}
+\quad 
+\newpage
+\pagenumbering{Roman}
+ 
+\cleardoubleoddpage
+
+% ✅✅✅
+\newpage
+ \section*{Abstract}
+This bachelor thesis aims to create synthetic leaf disease image datasets for sugar beet from available public datasets using image augmentation techniques. The lack of public image datasets for training disease detection models in sugar beet motivated this research. In order to create the synthetic dataset, we used publicly available sugar beet plant seedlings dataset and 
+diseased image dataset of a plant that shares the same genus with a known disease in sugar beet from the PlantVillage dataset. 
+We need to concatenate the extracted diseases in other plants to leaf areas of healthy seedling images of sugar beet plants. First, we will build a pipeline that can automatically overlay diseased areas on healthy areas of leaf images. Then, we present and evaluate the resulting images of the experiment by training convolutional neural network-based models. The experiment showed promising results to form a basis for further research on synthetic image generation for training disease detection models.
+Finally, the thesis was concluded with a comprehensive overview of the chapters and discussed limitations encountered during the experiment with recommendations for future works.
+
+
+
+
+
+\tableofcontents			%Inhaltsverzeichnis
+% \onehalfspacing
+
+
+
+%\chapter*{Abkürzungsverzeichnis}
+%	\begin{acronym}[4GDH]	% Zur Formatierung hier die längste Abkürzung des Verzeichnisses eintragen
+%		\acro{4GDH}{4th Generation District Heating} 	
+%	\end{acronym}
+
+\pagestyle{fancy}
+
+\input{cha/01Introduction}%link to chapters
+\input{cha/02Fundamentals}
+\input{cha/03RelatedWork}
+% \input{cha/04Analysis}
+\input{cha/05DesignImplementation}
+\input{cha/06Evaluation}
+\input{cha/07SummaryOutlook}
+%Literaturverzeichnis
+\newpage
+\lhead{}
+\rhead{\leftmark}
+\addcontentsline{toc}{chapter}{References}
+
+\bibliography{References}
+\bibliographystyle{alpha}
+
+
+\listoffigures				%Verzeichnis aller Bilder
+\listoftables				%Verzeichnis aller Tabellen
+%list of definitions, ...
+
+\chapter*{Affidavit}
+I Olaniyi Bayonle Alao herewith declare that I have composed the present paper and work by myself and without use of any other than the cited sources and aids. Sentences or parts of sentences quoted literally are marked as such; other references with regard to the statement and scope are indicated by full details of the publications concerned. The paper and work in the same or similar form has not been submitted to any examination body and has not been published. This paper was not yet, even in part, used in another examination or as a course performance
+. ~\\
+Lippstadt,  \today\\[.6cm] %<city>, <date>
+\myauthor\\ % signature
+\rule[0.5em]{20em}{0.5pt}
+
+% \appendix
+
+% \include{cha/08Appendix}
+
+\end{document}

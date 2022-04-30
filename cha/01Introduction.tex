@@ -1,0 +1,97 @@
+\chapter{Introduction}
+\label{cha:Introduction}
+\pagenumbering{arabic}
+
+% In the following I will explain in detail the introduction to the topic. In Section \ref{sec:Motivation} I will give a motivation on the thesis topic. Section \ref{sec:Goals} gives an overview of the goals this thesis and in Section \ref{sec:Overview} I will give an overview of my thesis. 
+
+
+% ✅✅✅✅✅
+% \section{Motivation}
+% \label{sec:Motivation}
+Currently, in the 21st century, computers have become ubiquitous in our everyday lives. Previously mundane tasks like switching on/off light switches, vacuuming, counting objects, and accurately predicting sales, to safety-critical tasks like driving vehicles and trains are currently performed efficiently by computers. Efforts are being made to extend the capabilities of computer systems to perform more intelligent tasks like disease detection, speech-to-text transcribing, anomaly detections that humans otherwise perform. However, the challenging part is transferring human knowledge to computers to perform such analysis and inference tasks. The approach humans use in learning is by transferring knowledge of a system to another related system. For example, humans can effortlessly differentiate between a cat and a dog in an image. This ability to differentiate is possible because specific characteristics are present in dogs but absent in cats, irrespective of their breeds. However, manually programming computers to make such differentiation will prove impractical or possibly amount to several lines of code. Likewise, it is unrealistic to manually program a computer to detect diseases in an image or make driving decisions in the case of autonomous vehicles. 
+
+These shortcomings for computers have motivated researchers to trial the use of machine learning techniques to allow computers to analyse and interpret objects in images or videos. An exciting use case in agriculture is training models to monitor and detect plant leaf diseases or nutrient deficiencies through image data. The use of computers to precisely monitor and give respective treatment to particular plants in plantations to get increased average yields and reduce operational farming costs is known as precision farming. 
+
+Traditionally, disease detection techniques used to involve using naked eyes to visually inspect the leaves and branches of plants for any sign of infection. However, this plant health monitoring and disease detection method are time-consuming. For example, it is labour tasking and financially draining to visually inspect plant leaves spanning several hectares of land. Thanks to the advancements in the technological sector, researchers have shown the possibilities of plant health monitoring using machine learning techniques to classify plant leaves captured with RGB (Red Green Blue) cameras and hyperspectral sensors as healthy or unhealthy. Unfortunately, one major challenge in using these technologies is the unavailability of sufficient datasets for model training.
+
+
+
+
+% ✅✅✅✅
+\section{Goals}
+\label{sec:Goals}
+Plant diseases cause significant hindrances to the sustainability and profitability of agriculture \cite{harvey2014extreme}. In order to prevent the losses that come with diseases in plants, different methods have been developed to monitor and diagnose these diseases before they lead to a significant infestation. One of such methods is the use of established knowledge in molecular biology and immunology to precisely identify the causal agents of diseases in plants and develop treatments for eradicating them before they become catastrophic to the plants. However, such an approach requires experts in the disease domain to cut down the plants and perform tests to identify the specific disease affecting the plants. Moreover, this disease detection technique is invasive; it is likewise tedious and expensive \cite{wang2017automatic}.
+
+These shortcomings in the traditional disease detection motivated research in the direction of non-invasive plant disease detections using data from sensors like RGB, hyperspectral imaging and spectroscopy with machine learning algorithms \cite{mohanty2016using, ashourloo2016investigation, zhang2019deep}. The research results on the use of collected real-time data from plants with machine learning techniques showed promising results that are more accurate in plant disease detection and classification than domain experts in such fields, thereby potentially minimising costs for farmers \cite{barreto2020hyperspectral}. 
+Standard algorithms used for plant disease detection and classification tasks are linear regression, logistic regression, random forest, clustering, Gaussian models, decision trees (DT), Naïve Bayes (NB), K-nearest neighbours (KNN), and support vector machines (SVM) among others.
+
+
+Despite the success of plant disease detection, using sensor data with classical machine learning (ML) algorithms was time-consuming due to manual feature extractions and not being robust enough for use on datasets containing variations from the original training dataset \cite{ferentinos2018deep}. Nevertheless, the understandings from ML laid a solid foundation for current research in the direction of deep neural networks for automating the identification of disease from the data captured from sensors to allow precise plant treatment in a field. Furthermore, advancements in computer vision and artificial intelligence have led to solutions that were found to accurately solve complex decision-making tasks like yield forecasting \cite{liu2017computer}, plant recognition \cite{gao2017mobile}, and nutrition deficiency \cite{yi2020deep} in precision farming.
+
+Consequently, deep neural networks require a large amount of image data with appropriate diversity representing different conditions that can likely occur to create a high-quality model for the trained tasks. However, capturing all the variability of conditions possible is a cumbersome task, hence the need to augment the existing dataset using computer vision and deep learning techniques to create robust image datasets for plant disease detection tasks in sugar beet. Furthermore, there are no publicly accessible datasets for sugar beet disease detection, and acquiring these datasets requires several months and professionals to ensure the quality and diversity needed \cite{barreto2020hyperspectral, jay2020scoring}.
+% [\cite{} papers that it took them months to get sugar beets dataset].
+
+This thesis proposes the approaches below to solve the lack of a publicly available dataset for disease detection in sugar beet plants: 
+%Furthermore, understandings from this experiment can be utilised to create disease leaf images in other plants.
+ \begin{itemize}
+     \item Use image augmentation techniques to overlay diseased areas in a plant on top of healthy areas in another plant. However, there should be a common disease occurrence in both plants.
+     \item Validate the generated images by training convolutional neural network (CNN) based disease detection models using the synthetic images and the original healthy sugar beet images.
+
+ \end{itemize}
+
+
+The results from creating these synthetic datasets will create an avenue for transferring knowledge in this domain to create more datasets for other plants, hence creating more than enough datasets for model training.
+
+% ✅✅✅✅
+\section{Sketch of Approach}
+\label{sec:Overview}
+% The required fundamentals of this thesis are explained in Chapter \ref{cha:Fundamentals}. These include the fundamental basics of automata theory. Related work is discussed in Chapter \ref{cha:RelatedWork}. The detailed consideration of the influences on this work, such as existing systems to be considered, user requirements and environmental influences, are analysed in Chapter \ref{cha:Analysis}. Based on this analysis as well as related work, a design is presented in Chapter \ref{cha:DesignImplementation} that considers the posed requirements of this work. An evaluation of the developed approach is presented in Chapter 6. Here, the requirements set are reflected upon. Finally, a summary and outlook is presented in Chapter \ref{cha:SummaryOutlook}.  
+
+Our approach to artificial dataset creation is based on segmenting the leaf areas of the diseased and healthy plants from their background in the images and then concatenating the extracted diseased areas intelligently on the healthy leaf areas. First, we propose segmenting foreground and background leaf areas by converting the images to their respective HSV (Hue Saturation Value) values to find the leaves’ upper and lower bound values. We then propose using thresholding algorithms to create binary masks of the leaf areas and the background and finally use boolean operations to create the new image. Furthermore, we propose bringing the infected areas of the diseased leaf to the foreground and then masking out healthy areas to become the background. Figure \ref{fig:my_arch} showcases a visual representation of the proposed artificial dataset creation pipeline. 
+% The values corresponding to the diseased areas are rotated and placed accordingly on the leaf areas of the sugar beet plants, as shown in figure \ref{fig:my_arch}.
+The extracted disease areas in the left side of figure \ref{fig:my_arch} are concatenated with segmented healthy leaf areas of sugar beet in the right side of the figure to create synthetic disease images.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=1\textwidth]{Figures/architecture.png}
+    \caption{Overview of proposed appraoch for generating artificial dataset.}
+    \label{fig:my_arch}
+\end{figure}
+
+With the resulting images from the previously proposed approach, we suggest potentially automating the process of creating more randomly unique datasets using generative adversarial neural networks (GAN). On a high level, GANs work by using two neural networks competing against each other to create synthetic datasets. First, the neural generator network creates new synthetic image data, which are then fed to the discriminator neural network to ascertain how close the generated image is to the original images.
+
+\section{Organisation of Paper}
+
+In section \ref{sec:Goals}, we described plant disease monitoring and disease detection and the goals of the thesis to address the lack of sufficient datasets for model training. Then, in section \ref{sec:Overview} we gave an overview of the sketch of approaches for implementing the proposed approach to solving the lack of public dataset in sugar beet for disease detection tasks. Next, chapter \ref{cha:Fundamentals} explains the relevant fundamentals necessary for the experiment performed in this research. Then, in chapter \ref{cha:RelatedWork} we highlight related works to the thesis. Next, based on the knowledge from the related works and fundamentals described in previous chapters, chapter \ref{cha:DesignImplementation} presents the prerequisites and a high-level overview of the approach design and its implementation. Next, chapter \ref{cha:Evaluation} presents and discusses the results of the generated synthetic image datasets. Finally, chapter \ref{cha:SummaryOutlook} concludes the research work by summarising the thesis and giving recommendations for future work. 
+
+% \begin{itemize}
+    
+%     \item \textbf{Chapter 2:} explains the relevant fundamentals necessary for the experiment performed in this research. 
+%     % Furthermore, the chapter presents the related works to the thesis.
+
+%     \item \textbf{Chapter 3:} highlights related works to the thesis.
+
+%     \item \textbf{Chapter 4:} presents the prerequisites and a high-level overview of the approach design and its implementation
+
+%     \item \textbf{Chapter 5:} presents and discusses the results of the generated synthetic image datasets.
+
+%     \item \textbf{Chapter 6:} draws a conclusion by summarising the thesis and giving recommendations for future work. 
+    
+% \end{itemize}
+
+% This chapter introduces the problem of plant health monitoring using machine learning techniques. First, it discusses the issue of not having enough datasets to train machine learning algorithms for plant health monitoring - particularly the lack of public datasets for disease detection in sugar beets. Then the chapter continues by shortly presenting the proposed approach to solving the lack of public dataset in sugar beet for disease detection tasks, highlighting the contributions of the thesis. The rest of the thesis is structured as follows.
+
+% \begin{itemize}
+    
+%     \item \textbf{Chapter 2:} explains the relevant fundamentals necessary for the experiment performed in this research. 
+%     % Furthermore, the chapter presents the related works to the thesis.
+
+%     \item \textbf{Chapter 3:} highlights related works to the thesis.
+
+%     \item \textbf{Chapter 4:} presents the prerequisites and a high-level overview of the approach design and its implementation
+
+%     \item \textbf{Chapter 5:} presents and discusses the results of the generated synthetic image datasets.
+
+%     \item \textbf{Chapter 6:} draws a conclusion by summarising the thesis and giving recommendations for future work. 
+    
+% \end{itemize}
